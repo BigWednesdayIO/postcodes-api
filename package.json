@@ -33,6 +33,13 @@
     "grunt-mocha-test": "^0.12.7",
     "grunt-retire": "^0.3.10",
     "load-grunt-tasks": "^3.3.0",
-    "mocha": "^2.3.4"
+    "mocha": "^2.3.4",
+    "swagger-tools": "^0.9.9"
+  },
+  "dependencies": {
+    "hapi": "^11.1.2",
+    "hapi-error-schemas": "^1.0.0",
+    "hapi-swaggered": "^2.4.1",
+    "hapi-version-route": "^1.0.1"
   }
 }
