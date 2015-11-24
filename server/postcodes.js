@@ -2,6 +2,7 @@
 
 const Boom = require('boom');
 const Joi = require('joi');
+const errorSchemas = require('hapi-error-schemas');
 
 const postCodeSchema = Joi.object({
   postcode: Joi.string().required().description('Postcode'),
@@ -49,9 +50,9 @@ exports.register = (server, options, next) => {
         }
       },
       response: {
-        status: {
+        status: Object.assign({
           200: postCodeSchema.description('Postcode data')
-        }
+        }, errorSchemas.statuses([404]))
       }
     }
   });
