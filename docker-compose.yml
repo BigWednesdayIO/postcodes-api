@@ -19,7 +19,7 @@ dev:
   ports:
     - '8080'
   volumes:
-    - .:/usr/postcodes-api
+    - .:/usr/local/postcodes-api
   links:
     - gclouddatastore
   environment:

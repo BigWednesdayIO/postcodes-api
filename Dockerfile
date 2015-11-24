@@ -2,9 +2,9 @@ FROM node:5.1.0
 
 EXPOSE 8080
 
-COPY . /usr/postcodes-api
+COPY . /usr/local/postcodes-api
 
-WORKDIR /usr/postcodes-api
+WORKDIR /usr/local/postcodes-api
 
 RUN npm install
 
