@@ -4,10 +4,16 @@ machine:
   python:
     version: 2.7.3
 
+checkout:
+  post:
+    - git submodule update --init
+
 dependencies:
   cache_directories:
     - '~/docker'
+    - ~/google-cloud-sdk
   override:
+    - scripts/install_deployment_tools.sh
     - sudo pip install -U docker-compose
     - if [[ -e ~/docker/node.tar ]]; then docker load -i ~/docker/node.tar; fi
     - if [[ -e ~/docker/gcd.tar ]]; then docker load -i ~/docker/gcd.tar; fi
@@ -20,3 +26,15 @@ dependencies:
 test:
   override:
     - docker-compose run api npm run ci
+
+deployment:
+  dev:
+    branch: feature/deployment
+    commands:
+      - echo "production = true" > .npmrc
+      - deploy_scripts/rolling_deploy.sh postcodes-api app=postcodes-api development ${PWD} ${PWD}/kubernetes/rc.json ${PWD}/kubernetes/service.json
+  prod:
+    tag: /v.*/
+    commands:
+      - echo "production = true" > .npmrc
+      - deploy_scripts/rolling_deploy.sh postcodes-api app=postcodes-api production ${PWD} ${PWD}/kubernetes/rc.json ${PWD}/kubernetes/service.json
