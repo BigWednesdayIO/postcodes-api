@@ -13,7 +13,7 @@ dependencies:
     - '~/docker'
     - ~/google-cloud-sdk
   override:
-    - deploy_scripts/install_deployment_tools.sh
+    - gcloud_scripts/install_sdk.sh
     - sudo pip install -U docker-compose
     - if [[ -e ~/docker/node.tar ]]; then docker load -i ~/docker/node.tar; fi
     - if [[ -e ~/docker/gcd.tar ]]; then docker load -i ~/docker/gcd.tar; fi
@@ -33,9 +33,9 @@ deployment:
     commands:
       - echo "production = true" > .npmrc
       - export OVERRIDE_IMAGE_TAG=dev
-      - deploy_scripts/rolling_deploy.sh postcodes-api app=postcodes-api development ${PWD} ${PWD}/kubernetes/rc.json ${PWD}/kubernetes/service.json
+      - gcloud_scripts/kubernetes_deploy.sh postcodes-api app=postcodes-api development ${PWD} ${PWD}/kubernetes/rc.json ${PWD}/kubernetes/service.json
   prod:
     tag: /v.*/
     commands:
       - echo "production = true" > .npmrc
-      - deploy_scripts/rolling_deploy.sh postcodes-api app=postcodes-api production ${PWD} ${PWD}/kubernetes/rc.json ${PWD}/kubernetes/service.json
+      - gcloud_scripts/kubernetes_deploy.sh postcodes-api app=postcodes-api production ${PWD} ${PWD}/kubernetes/rc.json ${PWD}/kubernetes/service.json
