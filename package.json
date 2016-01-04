@@ -1,6 +1,6 @@
 {
   "name": "postcodes-api",
-  "version": "0.0.1",
+  "version": "1.0.0",
   "description": "API exposing postcode data",
   "main": "index.js",
   "scripts": {
