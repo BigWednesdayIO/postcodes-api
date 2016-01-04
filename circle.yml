@@ -32,7 +32,7 @@ deployment:
     branch: master
     commands:
       - echo "production = true" > .npmrc
-      - OVERRIDE_IMAGE_TAG=dev gcloud_scripts/kubernetes_deploy.sh postcodes-api app=postcodes-api development ${PWD} ${PWD}/kubernetes/rc.json ${PWD}/kubernetes/service.json
+      - gcloud_scripts/kubernetes_deploy.sh postcodes-api app=postcodes-api development ${PWD} ${PWD}/kubernetes/rc.json ${PWD}/kubernetes/service.json dev
   prod:
     tag: /v.*/
     commands:
